@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import "package:mobile_music_player/musicPlayer/homepage.dart";
-import 'package:mobile_music_player/components/Colors.dart';
+import "package:muzz/musicPlayer/homepage.dart";
+import 'package:muzz/components/Colors.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});

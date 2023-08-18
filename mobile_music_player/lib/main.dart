@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_music_player/musicPlayer/loading_screen.dart';
+import 'package:muzz/musicPlayer/loading_screen.dart';
 
 void main() {
   runApp(const MyApp());
