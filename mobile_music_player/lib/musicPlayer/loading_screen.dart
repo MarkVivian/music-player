@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import "package:muzz/musicPlayer/homepage.dart";
-import 'package:muzz/components/Colors.dart';
+import 'package:muzz/musicPlayer/main_page.dart';
+import 'package:muzz/components/variables.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -13,7 +13,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void switchScreens() {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Discover()));
+          context, MaterialPageRoute(builder: (context) => const MainPage()));
     });
   }
 
@@ -26,7 +26,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: deeppurple,
+      backgroundColor: deepPurple,
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

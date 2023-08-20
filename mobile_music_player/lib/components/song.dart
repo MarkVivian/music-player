@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:muzz/components/Colors.dart';
+import 'package:muzz/components/variables.dart';
 
 TextStyle textStyling = const TextStyle(color: Colors.grey);
 
