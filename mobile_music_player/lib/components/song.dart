@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:muzz/components/variables.dart';
 
-TextStyle textStyling = const TextStyle(color: Colors.grey);
 
 class DeviceSong extends StatefulWidget {
-  final String time, album, name, image;
+  final String time, album, name, image, index;
   final Function removeFromList;
   const DeviceSong(
       {super.key,
       required this.time,
+      required this.index,
       required this.album,
       required this.name,
       required this.image,
@@ -27,7 +27,7 @@ class _DeviceSongState extends State<DeviceSong> {
   Widget build(BuildContext context) {
     return Dismisser(
         dismiseFunction: widget.removeFromList,
-        word: widget.time,
+        index: widget.index,
         song: Container(
           margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
           decoration: BoxDecoration(color: lightPurple),
@@ -64,14 +64,14 @@ class _DeviceSongState extends State<DeviceSong> {
                 Row(children: [
                   Text(
                     "album : ${widget.album}",
-                    style: textStyling,
+                    style: const TextStyle(color: Colors.grey),
                   ),
                   const SizedBox(
                     width: 20.0,
                   ),
                   Text(
                     widget.time,
-                    style: textStyling,
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 ]),
               ],
@@ -97,12 +97,12 @@ class _DeviceSongState extends State<DeviceSong> {
 }
 
 class Dismisser extends StatefulWidget {
-  final String word;
+  final String index;
   final Widget song;
   final Function dismiseFunction;
   const Dismisser(
       {super.key,
-      required this.word,
+      required this.index,
       required this.song,
       required this.dismiseFunction});
 
@@ -111,31 +111,32 @@ class Dismisser extends StatefulWidget {
 }
 
 class _DismisserState extends State<Dismisser> {
-  Widget containerWidget(Alignment alignment, ) {
+  // function for the two delete icons.
+  Widget containerWidget(Alignment alignment) {
     return Container(
-      color: const Color.fromARGB(255, 143, 37, 30),
-      alignment: alignment,
-      child: Icon(
-        Icons.delete,
-        size: 40.0,
-        )
-    );
+        color: const Color.fromARGB(255, 143, 37, 30),
+        alignment: alignment,
+        child: Icon(
+          Icons.delete,
+          size: 40.0,
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: Key(widget.word),
+      key: Key(widget.index),
       background: containerWidget(Alignment.centerLeft),
       secondaryBackground: containerWidget(Alignment.centerRight),
-      onDismissed: (value) {
-        widget.dismiseFunction();
+      onDismissed: (dismisableDirection) {
+        widget.dismiseFunction(widget.index);
       },
       child: widget.song,
     );
   }
 }
 
+// THIS CONTAINS THE DOWNLOAD SONGS LAYOUT.
 class DownloadSong extends StatefulWidget {
   final String time, album, name, image, percentage;
   const DownloadSong(
@@ -157,6 +158,7 @@ class _DownloadSongState extends State<DownloadSong> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 0),
       decoration: BoxDecoration(color: lightPurple),
       width: 600,
       height: 70,
@@ -200,42 +202,51 @@ class _DownloadSongState extends State<DownloadSong> {
             Row(children: [
               Text(
                 "album : ${widget.album}",
-                style: textStyling,
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12.0,
+                ),
+
               ),
               const SizedBox(
                 width: 10.0,
               ),
               Text(
                 "time : ${widget.time}",
-                style: textStyling,
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12.0
+                  ),
               ),
             ]),
           ],
         ),
-        Expanded(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      downloadState = !downloadState;
-                    });
-                  },
-                  icon: Icon(
-                    downloadState == true ? Icons.downloading : Icons.download,
-                    size: 50.0,
-                    color: Colors.black,
-                  ),
-                ),
-              ]),
+        SizedBox(
+          width: 12.0,
         ),
+        Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    downloadState = !downloadState;
+                  });
+                },
+                icon: Icon(
+                  downloadState == true ? Icons.downloading : Icons.download,
+                  size: 35.0,
+                  color: Colors.black,
+                ),
+              ),
+            ]),
       ]),
     );
   }
 }
 
+// THIS WILL CHANGE THE STATE OF THE SONG EITHER FROM PLAY TO PAUSE.
 class ArtistImage extends StatefulWidget {
   final Widget avatar;
   final VoidCallback playStateManager;

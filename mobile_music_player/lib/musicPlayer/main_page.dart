@@ -9,16 +9,22 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int currentValue = 0;
+  int currentValue = 1;
   bool playState = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: deepPurple,
+      resizeToAvoidBottomInset: false,
 
+      
       appBar: pagesAppbar[currentValue],
 
-      body: pagesBody[currentValue],
+      // this shows the body. the indexStack makes sure the state is kept in the body widgets.
+      body: IndexedStack(
+          index: currentValue,
+          children: pagesBody,
+      ),
 
       bottomNavigationBar: SizedBox(
         height: 80.0,
@@ -34,8 +40,8 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
             BottomNavigationBarItem(
                 icon: CircleAvatar(
-                    backgroundImage: AssetImage("assets/randomArtist.jpg"),
-                    radius: 22.0,
+                  backgroundImage: AssetImage("assets/randomArtist.jpg"),
+                  radius: 22.0,
                 ),
                 label: ""),
             BottomNavigationBarItem(
