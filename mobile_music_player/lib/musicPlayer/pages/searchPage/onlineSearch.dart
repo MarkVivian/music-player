@@ -13,7 +13,8 @@ class OnlineSearch extends StatefulWidget {
 class _OnlineSearchState extends State<OnlineSearch> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Flexible(
+      flex: 1,
       child: Column(
         children: [
           Container(
@@ -35,6 +36,7 @@ class _OnlineSearchState extends State<OnlineSearch> {
             ),
           ),
           Expanded(
+            flex: 1,
             child: ListView.builder(
                 itemCount: widget.online.length,
                 padding: const EdgeInsets.all(1.0),

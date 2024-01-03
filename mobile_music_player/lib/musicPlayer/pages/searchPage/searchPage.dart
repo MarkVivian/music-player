@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muzz/components/song.dart';
 import 'package:muzz/components/variables.dart';
-import 'package:muzz/musicPlayer/pages/searchPage/inputManager.dart';
 import 'package:muzz/musicPlayer/pages/searchPage/onlineSearch.dart';
 // TODO need to learn how provider works
 class SearchAppbar extends StatefulWidget implements PreferredSizeWidget {
@@ -14,7 +13,6 @@ class SearchAppbar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _SearchAppbarState extends State<SearchAppbar> {
-  final InputManager inputManager = InputManager();
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -44,9 +42,6 @@ class _SearchAppbarState extends State<SearchAppbar> {
               flex: 1,
               child: IconButton(
                 onPressed: () {
-                  setState(() {
-                    inputManager.userInput = "butotn orks";
-                  });
                 },
                 icon: const Icon(
                   Icons.search,
@@ -69,7 +64,6 @@ class SearchBody extends StatefulWidget {
 }
 
 class _SearchBodyState extends State<SearchBody> {
-  final InputManager inputManager = InputManager();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -160,10 +154,6 @@ class _SearchBodyState extends State<SearchBody> {
                         });
                   }),
             ),
-          ),
-          Text(
-            inputManager.userInput,
-            style: const TextStyle(color: Colors.white),
           ),
           // ONLINE SONGS ARE HERE.
           Visibility(
